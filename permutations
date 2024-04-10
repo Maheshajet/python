@@ -1,5 +1,15 @@
-from itertools import permutations as ps
-perm=ps([1,1,3])
-for i in list(perm):
-   print(i)
-
+def generate_permutations(input_list):
+    result = []
+    if len(input_list) == 0:
+        return [[]] 
+    for i in range(len(input_list)):
+        current_element = input_list[i]
+        rem = input_list[:i] + input_list[i+1:]
+        remaining_permutations = generate_permutations(rem  )
+        for perm in remaining_permutations:
+            result.append([current_element] + perm)
+    return result
+input_list = [1, 2, 3]
+permutations_list = generate_permutations(input_list)
+for perm in permutations_list:
+    print(perm)
